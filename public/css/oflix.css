@@ -15,6 +15,10 @@ html {
     text-transform: uppercase;
 }
 
+body {
+   background-image: url(public/logo/bg.jpeg);
+}
+
 .title,
 .nav-item {
     font-family: bebas Neue;
@@ -74,7 +78,12 @@ html {
     background-color: #fecc00;
 }
 
+.link_search {
+    list-style-type: square;
+}
+
+.link_search-item,
 .character-link {
-    text-decoration: none;
     color: black;
+    text-decoration: none;
 }

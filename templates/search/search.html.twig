@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Recherche du terme {{ searchStore }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Résultats pour le terme "{{ searchStore }}"</h1>
+    <ul class="link_search">
+    {% for tvShow in results %}        
+        <li>
+        <a class="link_search-item" href="{{ path('tvshow_read', {id:tvShow.id}) }}">
+            {{ tvShow.title }}
+        </a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

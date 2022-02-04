@@ -19,22 +19,24 @@ class TvShowRepository extends ServiceEntityRepository
         parent::__construct($registry, TvShow::class);
     }
 
-    // /**
-    //  * @return TvShow[] Returns an array of TvShow objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Retourne toutes les séries dont le titre
+     * contient la valeur de $searchTerm
+     * 
+     * @return TvShow[] Returns an array of TvShow objects
+     */
+    public function findAllBySearchTerm($searchTerm)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+        return
+            $this->createQueryBuilder('tvshow')
+
+            //WHERE title LIKE searchTerm
+            ->andWhere('tvshow.title LIKE :searchTerm')
+            ->setParameter(':searchTerm', "%$searchTerm%")
+
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?TvShow

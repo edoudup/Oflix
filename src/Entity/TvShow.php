@@ -69,16 +69,16 @@ class TvShow
      */
     private $categories;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Format::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $format;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="tvShows")
+     */
+    private $format;
 
     public function __construct()
     {
@@ -254,18 +254,6 @@ class TvShow
         return $this;
     }
 
-    public function getFormat(): ?Format
-    {
-        return $this->format;
-    }
-
-    public function setFormat(Format $format): self
-    {
-        $this->format = $format;
-
-        return $this;
-    }
-
     public function getCountry(): ?string
     {
         return $this->country;
@@ -274,6 +262,18 @@ class TvShow
     public function setCountry(string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getFormat(): ?Format
+    {
+        return $this->format;
+    }
+
+    public function setFormat(?Format $format): self
+    {
+        $this->format = $format;
 
         return $this;
     }
