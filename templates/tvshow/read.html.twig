@@ -1,75 +1,91 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-{{ tvShow.title }}
+	{{ tvShow.title }}
 {% endblock %}
 
 {% block body %}
-<div class="container bg-light pt-5">
+	<div class="container bg-light pt-5">
 
-        <div class="row mb-2">
+		<div class="row mb-2">
 
-            <div class="col">
+			<div class="col">
 
-                <div class="row g-0 border rounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
-                    <div class="col-4 movie__poster img-thumbnail">
-                        <img src="../../affiche/{{tvShow.image}}" class="img-fluid">
-                    </div>
+				<div class="row g-0 border rounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
+					<div class="col-4 movie__poster img-thumbnail">
+						<img src="../../affiche/{{tvShow.image}}" class="img-fluid">
+					</div>
 
-                    <div class="col-8 p-4 d-flex flex-column position-static bg-light">
-                        <a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger"><i class="bi bi-bookmark-plus"></i></a>
-                        <strong class="d-inline-block mb-2 text-primary">{{ tvShow.format.name }}</strong>
-                        <h3 class="mb-1">{{ tvShow.title }}</h3>
-                        <div class="mb-1 text-muted">93 min</div>
-                        <p>
-                            {% for category in tvShow.categories %}                              
-                            <span class="badge bg-warning text-dark">{{ category.name }}</span>
-                            {% endfor %}
-                        </p>
-                        <p>
-                          {{ tvShow.synopsis | nl2br }}
-                        </p>
-                        <div class="d-flex mb-4" style="color: orange;">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span class="ps-1">4.8</span>
-                        </div>
+					<div class="col-8 p-4 d-flex flex-column position-static bg-light">
+						<a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger">
+							<i class="bi bi-bookmark-plus"></i>
+						</a>
+						<strong class="d-inline-block mb-2 text-primary">{{ tvShow.format.name }}</strong>
+						<h3 class="mb-1">{{ tvShow.title }}</h3>
+						<div class="mb-1 text-muted">93 min</div>
+						<p>
+							{% for category in tvShow.categories %}
+								<span class="badge bg-warning text-dark">{{ category.name }}</span>
+							{% endfor %}
+						</p>
+						<p>
+							{{ tvShow.synopsis | nl2br }}
+						</p>
 
-                        <h2>{{ tvShow.seasons | length }} Saison(s)</h2>
-                        <ul class="list-unstyled">
-                            {% for season in tvShow.seasons %}                              
-                            <li>
-                              <span class="badge bg-danger fs-6 mb-2">
-                              Saison {{ season.seasonNumber }}
-                              </span>
-                              <small class="ms-1">{{ season.episodes | length }} épisode(s)</small>
-                            </li>
-                            {% endfor %}
-                        </ul>
+						<div class="d-flex mb-4" style="color: orange;">
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star-half"></i>
+							<span class="ps-1">4.8</span>
+						</div>
 
-                        <dl class="row">
-                            <dt class="col-sm-12">Avec :</dt>
-                            <dd class="col-sm-12">
-                                {% for character in tvShow.characters %}                                  
-                                  <a class="character-link" href="{{ character.link }}" target="_blank">{{ character.firstname }} {{ character.lastname }}</a><br> 
-                                {% endfor %}
-                            </dd>
-                            <dt class="col-sm-12">Pays</dt>
-                            <dd class="col-sm-12">{{ tvShow.country }}</dd>
-                            <dt class="col-sm-12">Date de sortie :</dt>
-                            <dd class="col-sm-12">{{tvShow.createdAt|date("d/m/Y")}}</dd>
-                        </dl>
+						{% if tvShow.seasons | length <= 1 %}
+							<h2>Saison :</h2>
+						{% else %}
+							<h2>Saisons :</h2>
+						{% endif %}
 
-                    </div>
-                </div>
+						<ul class="list-unstyled">
+							{% for season in tvShow.seasons %}
+								<li>
+									<span class="badge bg-danger fs-6 mb-2">
+										Saison
+										{{ season.seasonNumber }}
+									</span>
+									<small class="ms-1">{{ season.episodes | length }}
+										{% if season.episodes | length <= 1 %}
+											épisode
+										{% else %}
+											épisodes
+										{% endif %}
+									</small>
+								</li>
+							{% endfor %}
+						</ul>
 
-            </div>
+						<dl class="row">
+							<dt class="col-sm-12">Avec :</dt>
+							<dd class="col-sm-12">
+								{% for character in tvShow.characters %}
+									<a class="character-link" href="{{ character.link }}" target="_blank">{{ character.firstname }}
+										{{ character.lastname }}</a><br>
+								{% endfor %}
+							</dd>
+							<dt class="col-sm-12">Pays : </dt>
+							<dd class="col-sm-12">{{ tvShow.country }}</dd>
+							<dt class="col-sm-12">Date de sortie :</dt>
+							<dd class="col-sm-12">{{tvShow.publishedAt|date("d/m/Y")}}</dd>
+						</dl>
 
-        </div>
+					</div>
+				</div>
 
-    </div>
+			</div>
+
+		</div>
+
+	</div>
 
 {% endblock %}
