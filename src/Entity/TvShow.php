@@ -75,6 +75,11 @@ class TvShow
      */
     private $format;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $country;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
@@ -257,6 +262,18 @@ class TvShow
     public function setFormat(Format $format): self
     {
         $this->format = $format;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

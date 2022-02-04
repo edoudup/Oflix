@@ -13,7 +13,7 @@
 
                 <div class="row g-0 border rounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
                     <div class="col-4 movie__poster img-thumbnail">
-                        <img src="{{ tvShow.image }}" class="img-fluid">
+                        <img src="../../affiche/{{tvShow.image}}" class="img-fluid">
                     </div>
 
                     <div class="col-8 p-4 d-flex flex-column position-static bg-light">
@@ -54,11 +54,11 @@
                             <dt class="col-sm-12">Avec :</dt>
                             <dd class="col-sm-12">
                                 {% for character in tvShow.characters %}                                  
-                                  <a href="{{ character.link }}" target="_blank">{{ character.firstname }} {{ character.lastname }}</a><br> 
+                                  <a class="character-link" href="{{ character.link }}" target="_blank">{{ character.firstname }} {{ character.lastname }}</a><br> 
                                 {% endfor %}
                             </dd>
                             <dt class="col-sm-12">Pays</dt>
-                            <dd class="col-sm-12">USA</dd>
+                            <dd class="col-sm-12">{{ tvShow.country }}</dd>
                             <dt class="col-sm-12">Date de sortie :</dt>
                             <dd class="col-sm-12">{{tvShow.createdAt|date("d/m/Y")}}</dd>
                         </dl>
