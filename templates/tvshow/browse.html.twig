@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+O'Flix Browse
+{% endblock %}
+
+{% block body %}
+    <h1>Dernières séries</h1>
+    <ul>
+          {% for tvShow in tvShows %}            
+        <li>
+        <a href="{{ path('tvshow_read', {id:tvShow.id}) }}">
+            {{ tvShow.title }}
+        </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

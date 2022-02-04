@@ -16,8 +16,8 @@ class HomeController extends AbstractController
     {
         $latestTvshows = $tvShowRepository->findBy([], ['id' => 'DESC'], 3);
 
-        dd($latestTvshows);
-        return $this->render('home/index.html.twig', [
+        //dd($latestTvshows);
+        return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
