@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,16 @@ class Character
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $link;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=TvShow::class, mappedBy="characters")
+     */
+    private $tvShows;
+
+    public function __construct()
+    {
+        $this->tvShows = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +133,33 @@ class Character
     public function setLink(?string $link): self
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TvShow[]
+     */
+    public function getTvShows(): Collection
+    {
+        return $this->tvShows;
+    }
+
+    public function addTvShow(TvShow $tvShow): self
+    {
+        if (!$this->tvShows->contains($tvShow)) {
+            $this->tvShows[] = $tvShow;
+            $tvShow->addCharacter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTvShow(TvShow $tvShow): self
+    {
+        if ($this->tvShows->removeElement($tvShow)) {
+            $tvShow->removeCharacter($this);
+        }
 
         return $this;
     }
