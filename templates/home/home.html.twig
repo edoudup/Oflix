@@ -36,20 +36,34 @@
 							<a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger">
 								<i class="bi bi-bookmark-plus"></i>
 							</a>
-							<strong class="d-inline-block mb-2 text-primary">{{ tvShow.format.type }}</strong>
+							<strong class="d-inline-block mb-1 text-primary">{{ tvShow.format.type }}</strong>
 							<h3 class="mb-1">{{ tvShow.title }}</h3>
-							<div class="mb-1 text-muted">93 min</div>
+								<div class="mb-1 text-muted">
 							<p>
-								<small>{{ tvShow.synopsis }}</small>
+								{{ tvShow.seasons | length }}
+								{% if tvShow.seasons | length <= 1 %}
+									Saison 
+								{% elseif tvShow.seasons | length >= 2 %}
+									Saisons 
+								{% endif %}
+							</p>
+							</div>
+
+							<p>
+                           		{% for category in tvShow.categories %}                              
+                            		<span class="badge bg-warning text-dark">{{ category.name }}</span>
+                            	{% endfor %}
+                        	</p>
+
+							<p>
+								<small>
+									{{ tvShow.synopsis | striptags | slice(0, 200) }} ...
+								</small>
 							</p>
 
-							<div class="d-flex mb-4" style="color: orange;">
+							<div class="d-flex mb-2" style="color: orange;">
+								<span class="ps-1">{{tvShow.nbLikes}}</span>
 								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-half"></i>
-								<span class="ps-1">4.8</span>
 							</div>
 
 							<a href="{{ path('tvshow_read', {id:tvShow.id}) }}" class="fs-1 mt-3 text-danger align-self-start">

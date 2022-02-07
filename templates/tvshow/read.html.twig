@@ -22,7 +22,6 @@
 						</a>
 						<strong class="d-inline-block mb-2 text-primary">{{ tvShow.format.type }}</strong>
 						<h3 class="mb-1">{{ tvShow.title }}</h3>
-						<div class="mb-1 text-muted">93 min</div>
 						<p>
 							{% for category in tvShow.categories %}
 								<span class="badge bg-warning text-dark">{{ category.name }}</span>
@@ -33,13 +32,9 @@
 						</p>
 
 						<div class="d-flex mb-4" style="color: orange;">
-							<i class="bi bi-star-fill"></i>
-							<i class="bi bi-star-fill"></i>
-							<i class="bi bi-star-fill"></i>
-							<i class="bi bi-star-fill"></i>
-							<i class="bi bi-star-half"></i>
-							<span class="ps-1">4.8</span>
-						</div>
+								<span class="ps-1">{{tvShow.nbLikes }}</span>
+								<i class="bi bi-star-fill"></i>
+							</div>
 
 						{% if tvShow.seasons | length == 1 %}
 							<h2>Saison :</h2>
